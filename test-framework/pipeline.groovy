@@ -2,33 +2,22 @@
 
 pipeline {
     agent any
+    
+       tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "Apache Maven 3.6.3"
+    }
+    
     stages {
+        
         stage("mvn test") {
             steps {
                 script {
                     sh """
-                        cd /c/Users/aiordan/IdeaProjects/master/SeleniumTestFramework/test-framework/selenium-web-testing/
-                        /c/Maven/bin/mvn.cmd clean test 
-                        """
-                }
-            }
-        }
-//        stage("Allure generate") {
-//            steps {
-//                script {
-//                    sh """
-//                        cd /c/Users/aiordan/IdeaProjects/master/SeleniumTestFramework/test-framework/selenium-web-testing/
-//                        /c/Users/aiordan/scoop/shims/allure generate allure-results --clean -o allure-report
-//                        """
-//                }
-//            }
-//        }
-        stage("Allure serve") {
-            steps {
-                script {
-                    sh """
-                        cd /c/Users/aiordan/IdeaProjects/master/SeleniumTestFramework/test-framework/selenium-web-testing/
-                        /c/Users/aiordan/scoop/apps/allure/current/bin/allure serve -h localhost
+                       ls
+                       pwd
+                        cd test-framework/selenium-web-testing/
+                        mvn -Dmaven.test.failure.ignore=true clean test 
                         """
                 }
             }
