@@ -1,14 +1,14 @@
 package com.example.selenium.web.testing.runner;
 
 import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
+import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.junit.runner.RunWith;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
-//@Test
+@Test
 @RunWith(Cucumber.class)
 @CucumberOptions(
     plugin = {"json:target/jsonReports/cucumber.json", "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"},
