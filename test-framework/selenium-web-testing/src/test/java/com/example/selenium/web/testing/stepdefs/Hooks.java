@@ -6,13 +6,8 @@ import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import io.qameta.allure.Allure;
-import java.io.ByteArrayInputStream;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -54,9 +49,6 @@ public class Hooks extends AbstractStepDef {
     public void takeScreenshot(Scenario scenario) {
         if (scenario.isFailed()) {
             scenario.attach(this.screenshotUtils.getScreenshot(), "image/png", scenario.getName());
-            Allure.addAttachment("Screenshot",
-                                 new ByteArrayInputStream(((TakesScreenshot) this.applicationContext.getBean(WebDriver.class))
-                                                              .getScreenshotAs(OutputType.BYTES)));
             log.info("Screenshot is attached");
         }
     }
@@ -66,7 +58,6 @@ public class Hooks extends AbstractStepDef {
         if (scenario.isFailed()) {
             WebDriver driver = this.applicationContext.getBean(WebDriver.class);
             scenario.attach(String.valueOf(LogUtil.getLogs(driver).toJson()), "json", scenario.getName());
-            Allure.addAttachment("Logs", LogUtil.getLogs(driver).toString());
             log.info("Log file is attached");
         }
     }
