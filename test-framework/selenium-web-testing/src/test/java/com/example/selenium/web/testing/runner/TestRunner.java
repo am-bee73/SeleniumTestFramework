@@ -1,27 +1,35 @@
 package com.example.selenium.web.testing.runner;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
-import org.junit.runner.RunWith;
+import io.cucumber.testng.CucumberOptions;
+import io.cucumber.testng.FeatureWrapper;
+import io.cucumber.testng.PickleWrapper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
-@Test
-@RunWith(Cucumber.class)
 @CucumberOptions(
     plugin = {"json:target/jsonReports/cucumber.json","io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"},
     features = "src/test/resources/features",
-    glue = {"com.example.selenium.web.testing"},
-    tags = "not @ignore",
-    monochrome = true
+    extraGlue = {"com.example.selenium.web.testing"},
+    tags = "not @ignore"
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 
-    @DataProvider(parallel = true)
+    public static Integer scenarios;
+
+    @Override
+    @Test(dataProvider = "scenarios")
+    public void runScenario(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
+        super.runScenario(pickleWrapper, featureWrapper);
+    }
+
+    @DataProvider
     @Override
     public Object[][] scenarios() {
+        scenarios = super.scenarios().length;
         return super.scenarios();
     }
+
+    public TestRunner() {}
 }

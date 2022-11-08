@@ -4,8 +4,8 @@ public enum ErrorMessages {
 
     EXISTING_USERNAME_ERROR("Name %s is already taken."),
     EXISTING_EMAIL_ERROR("Email '%s' is already taken."),
-    USERNAME_AT_LEAST_6_CHARACTERS_LONG("The UserName must be at least 6 charecters long."),
-    PASSWORD_AT_LEAST_6_CHARACTERS_LONG("The Password must be at least 6 charecters long."),
+    USERNAME_AT_LEAST_6_CHARACTERS_LONG("The UserName must be at least 6 characters long."),
+    PASSWORD_AT_LEAST_6_CHARACTERS_LONG("The Password must be at least 6 characters long."),
     EMAIL_IS_REQUIRED("The Email field is required."),
     USERNAME_IS_REQUIRED("The UserName field is required."),
     PASSWORD_IS_REQUIRED("The Password field is required."),

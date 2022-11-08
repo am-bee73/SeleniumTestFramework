@@ -86,9 +86,11 @@ public class RegisterStepDefs extends BaseSteps {
 
         String actualErrorMessage = registerActions.getRegisterErrorMessages();
 
-        softAssert()
-            .assertThat(expectedErrorMessage)
-            .describedAs("Error messages are not displayed correctly.")
-            .isEqualTo(actualErrorMessage);
+//        softAssert()
+//            .assertThat(expectedErrorMessage)
+//            .describedAs("Error messages are not displayed correctly.")
+//            .isEqualTo(actualErrorMessage);
+
+        Assert.assertEquals(expectedErrorMessage, actualErrorMessage);
     }
 }
