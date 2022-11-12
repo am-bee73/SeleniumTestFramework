@@ -62,6 +62,7 @@ public class Hooks extends AbstractStepDef {
         }
     }
 
+    //todo: fix driver quit
 //    @After(order = 2)
 //    public void tearDown() {
 //        if (((RemoteWebDriver) this.applicationContext.getBean(WebDriver.class)).getSessionId() != null) {

@@ -20,6 +20,7 @@
 
   <modules>
     <module>selenium-web-testing</module>
+    <module>appium-mobile-testing</module>
   </modules>
 
   <properties>
