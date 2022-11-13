@@ -7,9 +7,20 @@ pipeline {
         maven "Apache Maven 3.6.3"
     }
 
+    environment {
+        APPIUM_PORT = 4723
+    }
+
     stages {
 
-        stage("mvn test") {
+        stage('Appium Server start') {
+            steps {
+                echo "Starting APPIUM server"
+                sh "/c/Users/aiordan/AppData/Roaming/npm/appium --port ${APPIUM_PORT} &"
+            }
+        }
+
+        stage("Executing tests") {
             steps {
                 script {
                     sh """
@@ -33,8 +44,22 @@ pipeline {
                 }
             }
         }
-    }
 
+        stage('Appium Server stop') {
+            steps {
+                echo "Stop appium server"
+                sh """ 
+                    APPIUM_PID=\$(netstat -ano -p tcp  | awk '/:4723 */ {split(\$NF,a,"/"); print a[2],a[1]}') 
+                    echo "\$APPIUM_PID" > pid.txt
+                    """
+
+                bat """
+                set /p pid=<pid.txt
+                tskill %pid%
+                """
+            }
+        }
+    }
     post {
         always {
             echo 'One way or another, I have finished !'
