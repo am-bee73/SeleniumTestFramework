@@ -1,8 +1,6 @@
 package com.example.appium.mobile.testing.stepdefs;
 
 import com.example.appium.mobile.testing.service.AppiumService;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
@@ -10,9 +8,7 @@ import io.cucumber.java.Scenario;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
@@ -31,13 +27,10 @@ public class Hooks extends BaseSteps {
     @Value("${screenshot.path}")
     private Path path;
 
-    private AppiumDriver driver;
-
     @Before
     public void driverInit() throws MalformedURLException {
         if (driver == null) {
-            driver = new AndroidDriver(new URL(appiumServer), appiumService.getCapabilities());
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(appiumWait));
+            driver = getDriver();
         }
     }
 
