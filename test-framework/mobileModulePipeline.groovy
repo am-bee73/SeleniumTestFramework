@@ -11,6 +11,10 @@ pipeline {
         APPIUM_PORT = 4723
     }
 
+    parameters {
+        choice(name: 'platform', choices: ['android', 'ios'], description: 'Pick something')
+    }
+
     stages {
 
         stage('Appium Server start') {
