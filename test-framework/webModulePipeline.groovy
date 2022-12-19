@@ -7,6 +7,10 @@ pipeline {
         maven "Apache Maven 3.6.3"
     }
 
+    parameters {
+        choice(name: 'browserType', choices: ['Chrome', 'Firefox', 'Edge'], description: 'Browser name:')
+    }
+
     stages {
 
         stage("mvn test") {
@@ -14,7 +18,7 @@ pipeline {
                 script {
                     sh """
                         cd test-framework/selenium-web-testing/
-                        mvn -Dmaven.test.failure.ignore=true clean test 
+                        mvn -Dmaven.test.failure.ignore=true clean test -Dbrowser=$browserType
                         """
                 }
             }
