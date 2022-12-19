@@ -12,7 +12,10 @@ pipeline {
     }
 
     parameters {
-        choice(name: 'platform', choices: ['android', 'ios'], description: 'Pick something')
+        choice(name: 'platform', choices: ['Android', 'iOS'], description: 'Platform:')
+        text(name: 'deviceName', defaultValue: 'RFCR30E35RL', description: 'Device name:')
+        text(name: 'packageName', defaultValue: 'com.sec.android.app.popupcalculator', description: 'Package:')
+        text(name: 'activityName', defaultValue: '.Calculator', description: 'Activity:')
     }
 
     stages {
@@ -29,7 +32,7 @@ pipeline {
                 script {
                     sh """
                         cd test-framework/appium-mobile-testing/
-                        mvn -Dmaven.test.failure.ignore=true clean test 
+                        mvn -Dmaven.test.failure.ignore=true clean test -Dplatform=$platform -DdeviceName=$deviceName -DpackageName=$packageName -Dactivity=$activityName
                         """
                 }
             }
