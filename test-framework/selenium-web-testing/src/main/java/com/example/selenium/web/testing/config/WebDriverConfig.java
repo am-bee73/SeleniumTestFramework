@@ -3,6 +3,7 @@ package com.example.selenium.web.testing.config;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -20,7 +21,9 @@ public class WebDriverConfig {
     @Bean
     public static WebDriver chromeDriver() {
         WebDriverManager.chromedriver().setup();
-        return new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        return new ChromeDriver(options);
     }
 
     @ConditionalOnProperty(name = "browser", havingValue = "firefox")
