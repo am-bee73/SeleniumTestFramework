@@ -17,14 +17,14 @@ pipeline {
             steps {
                 script {
 //                    For WINDOWS WORKERS
-                    bat "\"C:\\Program Files\\Git\\bin\\sh.exe\" -c \"cd test-framework/selenium-web-testing/ &&" +
-                            " mvn -Dmaven.test.failure.ignore=true clean test -Dbrowser=$browserType\""
+//                    bat "\"C:\\Program Files\\Git\\bin\\sh.exe\" -c \"cd test-framework/selenium-web-testing/ &&" +
+//                            " mvn -Dmaven.test.failure.ignore=true clean test -Dbrowser=$browserType\""
 
 //                    for LINUX
-//                    sh """
-//                        cd test-framework/selenium-web-testing/
-//                        mvn -Dmaven.test.failure.ignore=true clean test -Dbrowser=$browserType
-//                        """
+                    sh """
+                         cd /C/Users/aiordan/IdeaProjects/master/SeleniumTestFramework/test-framework/selenium-web-testing/
+                        mvn -Dmaven.test.failure.ignore=true clean test -Dbrowser=$browserType
+                        """
                 }
             }
         }
