@@ -30,10 +30,24 @@ pipeline {
         stage("Executing tests") {
             steps {
                 script {
-                    sh """
-                        cd test-framework/appium-mobile-testing/
-                        mvn -Dmaven.test.failure.ignore=true clean test -Dplatform=$platform -DdeviceName=$deviceName -DpackageName=$packageName -Dactivity=$activityName
-                        """
+//                    sh """
+//                        cd test-framework/appium-mobile-testing/
+//                        mvn -Dmaven.test.failure.ignore=true clean test -Dplatform=$platform -DdeviceName=$deviceName -DpackageName=$packageName -Dactivity=$activityName
+//                        """
+
+                    bat """
+    "C:\\Program Files\\Git\\bin\\sh.exe" -c "netstat -ano -p tcp | findstr :4723 > tmp.txt"
+    for /F "tokens=5" %%A in (tmp.txt) do (
+        for /F "tokens=1 delims=/" %%B in ("%%A") do (
+            set "APPIUM_PID=%%B"
+        )
+    )
+    del tmp.txt
+    echo %APPIUM_PID% > pid.txt
+"""
+
+
+
                 }
             }
         }
@@ -55,10 +69,11 @@ pipeline {
         stage('Appium Server stop') {
             steps {
                 echo "Stop appium server"
-                sh """ 
-                    APPIUM_PID=\$(netstat -ano -p tcp  | awk '/:4723 */ {split(\$NF,a,"/"); print a[2],a[1]}') 
-                    echo "\$APPIUM_PID" > pid.txt
-                    """
+//                sh """
+//                    APPIUM_PID=\$(netstat -ano -p tcp  | awk '/:4723 */ {split(\$NF,a,"/"); print a[2],a[1]}')
+//                    echo "\$APPIUM_PID" > pid.txt
+//                    """
+
 
                 bat """
                 set /p pid=<pid.txt
