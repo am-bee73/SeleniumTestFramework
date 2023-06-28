@@ -16,13 +16,9 @@ pipeline {
         stage("mvn test") {
             steps {
                 script {
-//                    For WINDOWS WORKERS
-//                    bat "\"C:\\Program Files\\Git\\bin\\sh.exe\" -c \"cd test-framework/selenium-web-testing/ &&" +
-//                            " mvn -Dmaven.test.failure.ignore=true clean test -Dbrowser=$browserType\""
 
-//                    for LINUX
                     sh """
-                         cd /C/Users/aiordan/IdeaProjects/master/SeleniumTestFramework/test-framework/selenium-web-testing/
+                         cd test-framework/selenium-web-testing/
                         mvn -Dmaven.test.failure.ignore=true clean test -Dbrowser=$browserType
                         """
                 }

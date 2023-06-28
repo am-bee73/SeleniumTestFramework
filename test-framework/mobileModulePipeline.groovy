@@ -31,7 +31,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        cd /C/Users/aiordan/IdeaProjects/master/SeleniumTestFramework/test-framework/appium-mobile-testing
+                        cd test-framework/appium-mobile-testing/
                         mvn -Dmaven.test.failure.ignore=true clean test -Dplatform=$platform -DdeviceName=$deviceName -DpackageName=$packageName -Dactivity=$activityName
                         """
                 }
@@ -55,8 +55,8 @@ pipeline {
         stage('Appium Server stop') {
             steps {
                 echo "Stop appium server"
-                sh """
-                    APPIUM_PID=\$(netstat -ano -p tcp  | awk '/:4723 */ {split(\$NF,a,"/"); print a[2],a[1]}')
+                sh """ 
+                    APPIUM_PID=\$(netstat -ano -p tcp  | awk '/:4723 */ {split(\$NF,a,"/"); print a[2],a[1]}') 
                     echo "\$APPIUM_PID" > pid.txt
                     """
 
